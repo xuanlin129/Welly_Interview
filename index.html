@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welly面試題目</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Welly 面試題目</h1>
+    <p style="color: red">未學習過React，故使用Vue攥寫</p>
+    <h2>4. React: 條件渲染</h2>
+    <p>點擊下方按鈕增減數字</p>
+    <h3>數字狀態：{{ ConditionalRendering }}</h3>
+    <hr>
+    <h2>5. React: 組件</h2>
+    <div>
+      <button @click="minus">-</button>
+      <span>{{ number }}</span>
+      <button @click="plus">+</button>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // 1. JavaScript: 字串反轉
+    function reverseString(str) {
+      return str.split('').reverse().join('')
+    }
+    console.log(reverseString('Hello'))
+
+    // 2. JavaScript: 陣列過濾
+    function filterNumbersGreaterThanFive(numbers) {
+      return numbers.filter(num => num > 5)
+    }
+    const numbers = [2, 8, 4, 10, 1, 7]
+    console.log(filterNumbersGreaterThanFive(numbers))
+
+    // 3. JavaScript: 重構
+    function formatName(firstName, lastName) {
+      // 直接宣告 formattedName 為 firstName + lastName
+      // 就不用再寫判斷式辨別哪個變數前要加空格
+      let formattedName = `${firstName} ${lastName}`
+      return formattedName;
+    }
+    console.log(formatName('子軒', '林'))
+
+    const { createApp, ref, computed } = Vue
+    createApp({
+      setup() {
+        const number = ref(0)
+        const ConditionalRendering = computed(() => {
+          if (number.value % 2 === 0) {
+            return '偶數'
+          } else {
+            return '奇數'
+          }
+        })
+
+        const minus = () => {
+          return number.value--
+        }
+        const plus = () => {
+          return number.value++
+        }
+
+        return {
+          number,
+          ConditionalRendering,
+          minus,
+          plus
+        }
+      }
+    }).mount('#app')
+
+
+
+  </script>
+</body>
+
+</html>
